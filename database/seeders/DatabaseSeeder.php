@@ -16,8 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory(15)->create();
-        Subcategory::factory(1)->create();
-        Product::factory(20)->create();
+        Category::factory(15)->create()->each(function (Category $category) {
+            $Subcategories = Subcategory::factory(5)->create()-> each(function (Subcategory $subcategory) {
+                $product = Product::factory(20)->create();
+            });
+        });
     }
 }
