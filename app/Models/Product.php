@@ -17,8 +17,9 @@ class Product extends Model
         'price',
     ];
 
-    public function category(): BelongsTo
+    public function subcategories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Subcategory::class);
     }
+
 }
