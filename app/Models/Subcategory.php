@@ -11,4 +11,8 @@ class Subcategory
     use HasFactory;
 
     protected  $fillable = ['name', 'photo'];
+
+    public static function with(string $string)
+    {
+    }
 }
