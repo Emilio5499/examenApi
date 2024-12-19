@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V3;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Str;
+use App\Http\Controllers\SubcategoryResource;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Product;
 use App\Models\Subcategory;
-use Illuminate\Http\Request;
 
 class SubcategoryController extends Controller
 {
