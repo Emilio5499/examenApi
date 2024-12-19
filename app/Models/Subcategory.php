@@ -15,4 +15,5 @@ class Subcategory
     public static function with(string $string)
     {
     }
+
 }

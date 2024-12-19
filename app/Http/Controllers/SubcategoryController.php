@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Product;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
@@ -29,6 +30,37 @@ class SubcategoryController extends Controller
             ->paginate(12);
 
         return view('subcategories.index', compact('subcategories'));
+    }
+
+    public function store(StoreCategoryRequest $request)
+    {
+        $data = $request->all();
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $name = Str::uuid() . '.' . $file->extension();
+            $file->storeAs('categories', $name, 'public');
+            $data['photo'] = $name;
+        }
+
+        $subcategory = Subcategory::create($data);
+
+        return new SubcategoryResource($subcategory);
+    }
+
+    public function update(Subcategory $subcategory, StoreCategoryRequest $request)
+    {
+        $subcategory->update($request->all());
+
+        return new SubcategoryResource($subcategory);
+    }
+
+    public function destroy(Subcategory $subcategory)
+    {
+        $subcategory->delete();
+
+        //return response(null, Response::HTTP_NO_CONTENT);
+        return response()->noContent();
     }
 
 }
